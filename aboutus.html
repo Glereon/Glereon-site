@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About us</title>
+<style>
+
+body { 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+      background: #111420; 
+      color: white;
+      position: relative;
+      box-sizing: border-box;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+    header { 
+      background: rgba(17, 20, 32, 0.6); 
+      padding: 1em; 
+      text-align: center; 
+      font-size: 1.5em; 
+      color: silver;
+      position: fixed; /* overlay on slides */
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      min-height: 70px;
+      }
+      header img {
+        margin-top: 4px;
+      }
+
+.logo {
+      height: 50px;
+      width: 50px;
+      margin-right: 0px;
+    }
+    .logo-glereon {
+      height: 50px;
+      width: 250px;
+      margin-left: 0px;
+    }
+    .menu-btn {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+.menu-btn span {
+  display: block;
+  width: 28px;
+  height: 4px;
+  margin: 4px 0;
+  background: #fe7300;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100%;
+  background: #111420;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 110;
+  padding-top: 70px;
+}
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.side-menu li {
+  margin: 1.5em 0;
+  text-align: left;
+}
+.side-menu a {
+  color: #fe7300;
+  text-decoration: none;
+  font-size: 1.2em;
+  padding: 0.5em 1em;
+  display: block;
+  transition: background 0.2s;
+}
+.side-menu a:hover {
+  background: #22263a;
+  color: #fff;
+}
+.side-menu.open {
+    transform: translateX(0);}
+
+    .lang-flags {
+  position: absolute;
+  top: 18px;
+  right: 60px;
+  display: flex;
+  align-items: center;
+  z-index: 101;
+}
+.flag {
+  width: 28px;
+  height: 20px;
+  margin-left: 6px;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 2px solid transparent;
+  transition: border 0.2s;
+}
+.flag.selected {
+  border: 2px solid #fe7300;
+}
+.aboutus1 {
+    align-items: center;
+    margin-top: 10em;
+    margin-left: 400px;
+    margin-right: 400px;
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #f0f0f0;
+    text-align: justify;
+}
+.aboutus2 {
+    align-items: center;
+    margin-top: 3em;
+    margin-left: 400px;
+    margin-right: 400px;
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #f0f0f0;
+    text-align: justify;
+}
+.aboutus3 {
+    align-items: center;
+    margin-top: 3em;
+    margin-left: 400px;
+    margin-right: 400px;
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #f0f0f0;
+    text-align: justify;
+}
+.aboutus4 {
+    align-items: center;
+    margin-top: 3em;
+    margin-left: 400px;
+    margin-right: 400px;
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #f0f0f0;
+    text-align: justify;
+}
+.tick1, .tick2, .tick3, .tick4 {
+    align-items: center;
+    margin-top: 1em;
+    margin-left: 400px;
+    margin-right: 400px;
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #f0f0f0;
+    text-align: justify;
+}
+
+.aboutus6 {
+    align-items: center;
+    margin-top: 3em;
+    margin-bottom: 300px;
+    margin-left: 400px;
+    margin-right: 400px;
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #f0f0f0;
+    text-align: justify;
+}
+
+    
+</style>
+</head>
+<body>
+
+<header>
+  <button class="menu-btn" id="menuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <img class="logo" src="glereon logo.png">
+  <img class="logo-glereon" src="GLEREON.png">
+  <span class="lang-flags">
+    <img src="flag-en.jpg" alt="English" id="flag-en" class="flag" title="English">
+    <img src="flag-lt.jpg" alt="Lietuvių" id="flag-lt" class="flag" title="Lietuvių">
+  </span>
+</header>
+<div class="side-menu" id="sideMenu">
+  <ul>
+    <li><a href="Glereon.html">Home</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="aboutus.html">About</a></li>
+    <li><a href="contactus.html">Contact</a></li>
+  </ul>
+</div>
+<div>
+<p class="aboutus1">
+    At GLEREON Labs, we believe that every car 
+    deserves to look its absolute best.
+Founded with passion for automotive care and 
+innovation, our mission is simple: to provide 
+high-quality, effective, and reliable car care 
+products that make detailing easier and more enjoyable
+ for everyone.
+ </p>
+<p class="aboutus2">
+From powerful shampoos that lift away dirt, 
+to quick detailers that add instant gloss, and 
+protective sealants that shield your car’s 
+surface – each GLEREON product is carefully 
+formulated to deliver professional-grade results, 
+whether you’re a car enthusiast or a professional 
+detailer.
+</p>
+<p class="aboutus3">
+We combine advanced chemistry, safe ingredients, 
+and elegant design to create a full range of care 
+solutions for every surface – paint, glass, 
+wheels, tyres, trim, and interiors.
+</p>
+<p class="aboutus4">
+Our promise is simple:
+</p>
+<p class="tick1">
+✔️ Performance you can trust
+</p>
+<p class="tick2">
+✔️ Easy-to-use formulations
+</p>
+<p class="tick3">
+✔️ Long-lasting protection & shine
+</p>
+<p class="tick4">
+✔️ Made with care in Lithuania
+</p>
+<p class="aboutus6">
+
+With GLEREON Labs, car care becomes more than 
+just maintenance – it becomes a ritual of
+ elegance and pride.
+</p>
+</div>
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+const sideMenu = document.getElementById('sideMenu');
+
+menuBtn.addEventListener('mouseenter', () => {
+  sideMenu.classList.add('open');
+});
+sideMenu.addEventListener('mouseleave', () => {
+  sideMenu.classList.remove('open');
+});
+    </script>
+</body>
+</html>

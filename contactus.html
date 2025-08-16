@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact us</title>
+<style>
+
+body { 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+      background: #111420; 
+      color: white;
+      position: relative;
+      box-sizing: border-box;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+    header { 
+      background: rgba(17, 20, 32, 0.6); 
+      padding: 1em; 
+      text-align: center; 
+      font-size: 1.5em; 
+      color: silver;
+      position: fixed; /* overlay on slides */
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      min-height: 70px;
+      }
+      header img {
+        margin-top: 4px;
+      }
+
+.logo {
+      height: 50px;
+      width: 50px;
+      margin-right: 0px;
+    }
+    .logo-glereon {
+      height: 50px;
+      width: 250px;
+      margin-left: 0px;
+    }
+    .menu-btn {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+.menu-btn span {
+  display: block;
+  width: 28px;
+  height: 4px;
+  margin: 4px 0;
+  background: #fe7300;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100%;
+  background: #111420;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 110;
+  padding-top: 70px;
+}
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.side-menu li {
+  margin: 1.5em 0;
+  text-align: left;
+}
+.side-menu a {
+  color: #fe7300;
+  text-decoration: none;
+  font-size: 1.2em;
+  padding: 0.5em 1em;
+  display: block;
+  transition: background 0.2s;
+}
+.side-menu a:hover {
+  background: #22263a;
+  color: #fff;
+}
+.side-menu.open {
+    transform: translateX(0);}
+
+    .lang-flags {
+  position: absolute;
+  top: 18px;
+  right: 60px;
+  display: flex;
+  align-items: center;
+  z-index: 101;
+}
+.flag {
+  width: 28px;
+  height: 20px;
+  margin-left: 6px;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 2px solid transparent;
+  transition: border 0.2s;
+}
+.flag.selected {
+  border: 2px solid #fe7300;
+}
+.contact-info {
+  margin-top: 300px;
+  margin-left: 300px;
+  font-size: 1.2em;
+  color: #fff;
+  line-height: 1.6;
+  
+}
+.contact-info1 {
+  margin-left: 300px;
+  font-size: 1.2em;
+  color: #fff;
+  line-height: 1.6;
+
+}
+.contact-info2 {
+  margin-left: 300px;
+  margin-bottom: 300px;
+  font-size: 1.2em;
+  color: #fff;
+  line-height: 1.6;
+}
+
+
+
+    
+</style>
+</head>
+<body>
+
+<header>
+  <button class="menu-btn" id="menuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <img class="logo" src="glereon logo.png">
+  <img class="logo-glereon" src="GLEREON.png">
+  <span class="lang-flags">
+    <img src="flag-en.jpg" alt="English" id="flag-en" class="flag" title="English">
+    <img src="flag-lt.jpg" alt="Lietuvių" id="flag-lt" class="flag" title="Lietuvių">
+  </span>
+</header>
+<div class="side-menu" id="sideMenu">
+  <ul>
+    <li><a href="Glereon.html">Home</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="aboutus.html">About</a></li>
+    <li><a href="contactus.html">Contact</a></li>
+  </ul>
+</div>
+<div>
+  <p class="contact-info">
+    Contact Us – GLEREON Labs
+    </p>
+<p class="contact-info1">
+We’d love to hear from you!
+</p>
+<p class="contact-info1">
+Whether you have questions about our products, 
+need support, feel free to reach out.
+</p>
+<p class="contact-info1">
+📍 Address: GLEREON Labs, Ezero g. 10, Lentvaris, Lithuania
+</p>
+<p class="contact-info1">
+📞 Phone: +370 648 30 737
+</p>
+<p class="contact-info1">
+📧 Email: glereon@gmail.com
+</p>
+<p class="contact-info1">
+🕒 Business Hours: Mon – Fri: 7:00 – 16:00
+</p>
+<p class="contact-info2">
+You can also connect with us on social media for updates, tips, and offers.
+  </p>
+
+
+
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+const sideMenu = document.getElementById('sideMenu');
+
+menuBtn.addEventListener('mouseenter', () => {
+  sideMenu.classList.add('open');
+});
+sideMenu.addEventListener('mouseleave', () => {
+  sideMenu.classList.remove('open');
+});
+    </script>
+</body>
+</html>

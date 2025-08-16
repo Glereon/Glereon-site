@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLEREON Labs</title>
+<style>
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+      background: #111420; 
+      color: white;
+      position: relative;
+      box-sizing: border-box;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+    header { 
+      background: rgba(17, 20, 32, 0.6); 
+      padding: 1em; 
+      text-align: center; 
+      font-size: 1.5em; 
+      color: silver;
+      position: fixed; /* overlay on slides */
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      min-height: 70px;
+      }
+      header img {
+        margin-top: 4px;
+      }
+      
+  
+    .product { 
+      background: #111420; 
+      border-radius: 8px; 
+      padding: 2em; 
+      text-align: center; 
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+    .product img { 
+      max-width: 100%; 
+      height: 150px; 
+      object-fit: contain; }
+    button { 
+      background: #fe7300; 
+      border: none; 
+      padding: 0.5em 1em; 
+      color: white; 
+      cursor: pointer; 
+      border-radius: 15px; }
+    button:hover {
+      background: #6b80c4; }
+    .cart { 
+      position: fixed; 
+      right: 0; 
+      top: 0;
+      width: 300px; 
+      height: 100%; 
+      background: #111420; 
+      padding: 1em; 
+      overflow-y: auto; 
+      box-shadow: -2px 0 8px rgba(0,0,0,0.5); 
+      transform: translateX(100%); 
+      transition: transform 0.3s ease; }
+    .cart.open { 
+      transform: translateX(0); }
+    .cart-item { 
+      display: flex; 
+      justify-content: space-between; 
+      margin: 0.5em 0; }
+    .cart-item span { 
+      flex: 1; }
+    .cart-total { 
+      margin-top: 1em; 
+      font-weight: bold; }
+    .cart-toggle { 
+      position: fixed; 
+      right: 30px; 
+      bottom: 80px; 
+      background: #fe7300; 
+      border: none; 
+      padding: 1.5em; 
+      border-radius: 50%; 
+      cursor: pointer;
+      z-index: 200;
+    }
+      
+    .logo {
+      height: 50px;
+      width: 50px;
+      margin-right: 0px;
+    }
+    .logo-glereon {
+      height: 50px;
+      width: 250px;
+      margin-left: 0px;
+    }
+    .cart-close {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    .cart-close:hover {
+      color: red;
+    }
+    .slideshow-container {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  z-index: 1;
+    }
+    .slideshow-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 100%;
+  top: 0;
+  opacity: 0;
+  transition: left 0.7s ease, opacity 0.7s ease;
+  display: block;
+}
+.slide.active {
+  left: 0;
+  opacity: 1;
+  z-index: 2;
+}
+.slide.prev {
+  left: -100%;
+  opacity: 0;
+  z-index: 1 !important;
+  height: 500px;
+}
+.cart {
+   z-index: 100;}
+.menu-btn {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+.menu-btn span {
+  display: block;
+  width: 28px;
+  height: 4px;
+  margin: 4px 0;
+  background: #fe7300;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100%;
+  background: #111420;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 110;
+  padding-top: 70px;
+}
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.side-menu li {
+  margin: 1.5em 0;
+  text-align: left;
+}
+.side-menu a {
+  color: #fe7300;
+  text-decoration: none;
+  font-size: 1.2em;
+  padding: 0.5em 1em;
+  display: block;
+  transition: background 0.2s;
+}
+.side-menu a:hover {
+  background: #22263a;
+  color: #fff;
+}
+.side-menu.open {
+  transform: translateX(0);
+}
+
+
+
+.container {
+ margin-top: 20px; /* small margin below slideshow */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+  padding: 1em;}
+    
+    .lang-flags {
+  position: absolute;
+  top: 18px;
+  right: 60px;
+  display: flex;
+  align-items: center;
+  z-index: 101;
+}
+.flag {
+  width: 28px;
+  height: 20px;
+  margin-left: 6px;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 2px solid transparent;
+  transition: border 0.2s;
+}
+.flag.selected {
+  border: 2px solid #fe7300;
+}
+    
+</style>
+</head>
+<body>
+
+<div class="slideshow-container">
+  <div class="slide fade active">
+    <img src="handwash1.jpeg" alt="Slide 1">
+  </div>
+  <div class="slide fade">
+    <img src="handwash2.jpg" alt="Slide 2">
+  </div>
+  <div class="slide fade">
+    <img src="handwash3.jpeg" alt="Slide 3">
+  </div>
+</div>
+
+<header>
+  <button class="menu-btn" id="menuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <img class="logo" src="glereon logo.png">
+  <img class="logo-glereon" src="GLEREON.png">
+  <span class="lang-flags">
+    <img src="flag-en.jpg" alt="English" id="flag-en" class="flag" title="English">
+    <img src="flag-lt.jpg" alt="Lietuvių" id="flag-lt" class="flag" title="Lietuvių">
+  </span>
+</header>
+<div class="side-menu" id="sideMenu">
+  <ul>
+    <li><a href="Glereon.html">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="aboutus.html">About</a></li>
+    <li><a href="contactus.html">Contact</a></li>
+  </ul>
+</div>
+<!-- ...rest of your code... -->
+
+<div class="container">
+  <div class="product">
+    <a href="carshampoo.html">
+    <img src="fliptopbottle.jpeg" alt="Car Shampoo">
+    </a>
+    <h3>Car Shampoo</h3>
+    
+    <p>High quality car shampoo.</p>
+    <span>€8.23</span>
+    <button onclick="addToCart('Car Shampoo', 8.23)">Add to Cart</button>
+  </div>
+  <div class="product">
+    <a href="quickdetailer.html">
+    <img src="spraybottle.jpg" alt="Quick Detailer">
+    </a>
+    <h3>Quick Detailer</h3>
+    
+    <p>Detailer for perfect shine.</p>
+    <span>€8.48</span>
+    <button onclick="addToCart('Quick Detailer', 8.48)">Add to Cart</button>
+  </div> 
+  <div class="product">
+    <a href="tyreandtrim.html">
+    <img src="spraybottle.jpg" alt="Tyre and Trim">
+    </a>
+    <h3>Tyre and Trim</h3>
+    
+    <p>Tyre and trim for new look.</p>
+    <span>€11.72</span>
+    <button onclick="addToCart('Tyre and Trim', 11.72)">Add to Cart</button>
+  </div>
+  <div class="product">
+    <a href="sealant.html">
+    <img src="spraybottle.jpg" alt="Sealant">
+    </a>
+    <h3>Sealant</h3>
+    
+    <p>Sealant spray for extra protection.</p>
+    <span>€10.49</span>
+    <button onclick="addToCart('Sealant', 10.49)">Add to Cart</button>
+  </div>
+  <div class="product">
+    <a href="interiorcleaner.html">
+    <img src="spraybottle.jpg" alt="Interior Cleaner">
+    </a>
+    <h3>Interior Cleaner</h3>
+    
+    <p>Interior cleaner for cleaness and freshnes.</p>
+    <span>€8.94</span>
+    <button onclick="addToCart('Interior Cleaner', 8.94)">Add to Cart</button>
+  </div>
+  <div class="product">
+    <a href="glasscleaner.html">
+    <img src="spraybottle.jpg" alt="Glass Cleaner">
+    </a>
+        
+    <h3>Glass Cleaner</h3>
+    
+    <p>Premium glass cleaner. </p>
+    <span>€8.81</span>
+    <button onclick="addToCart('Glass Cleaner', 8.81)">Add to Cart</button>
+  </div>
+
+  <!-- Add more products as needed -->
+</div>
+
+<div class="cart" id="cart">
+    <button class="cart-close" onclick="toggleCart()">❌</button>
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <div class="cart-total" id="cart-total">Total: €0.00</div>
+    <button onclick="checkout()">Checkout</button>
+</div>
+
+
+<button class="cart-toggle" onclick="toggleCart()">🛒</button>
+
+<script>
+
+
+ 
+let slideIndex = 0;
+let slides = document.getElementsByClassName("slide");
+
+function showSlide(nextIndex) {
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].classList.remove("active", "prev");
+    slides[i].style.zIndex = 1;
+  }
+  let prevIndex = slideIndex;
+  slides[prevIndex].classList.add("prev");
+  slides[nextIndex].classList.add("active");
+  slides[nextIndex].style.zIndex = 2;
+  slideIndex = nextIndex;
+}
+
+function autoSlides() {
+  let nextIndex = (slideIndex + 1) % slides.length;
+  showSlide(nextIndex);
+  setTimeout(autoSlides, 7000);
+}
+
+// Initialize first slide
+showSlide(0);
+setTimeout(autoSlides, 0);
+
+const menuBtn = document.getElementById('menuBtn');
+const sideMenu = document.getElementById('sideMenu');
+
+menuBtn.addEventListener('mouseenter', () => {
+  sideMenu.classList.add('open');
+});
+sideMenu.addEventListener('mouseleave', () => {
+  sideMenu.classList.remove('open');
+});
+  
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function addToCart(name, price) {
+    let existing = cart.find(item => item.name === name);
+    if (existing) {
+        existing.qty++;
+    } else {
+        cart.push({ name, price, qty: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart)); // Save to localStorage
+    updateCart();
+}
+
+function updateCart() {
+    cart = JSON.parse(localStorage.getItem('cart')) || []; // Load from localStorage
+    let cartItemsDiv = document.getElementById("cart-items");
+    cartItemsDiv.innerHTML = "";
+    let total = 0;
+    cart.forEach(item => {
+        total += item.price * item.qty;
+        cartItemsDiv.innerHTML += `
+            <div class="cart-item">
+                <span>${item.name} (${item.qty})</span>
+                <span>€${(item.price * item.qty).toFixed(2)}</span>
+                <button onclick="removeFromCart('${item.name}')">❌</button>
+            </div>
+        `;
+    });
+    document.getElementById("cart-total").innerText = "Total: €" + total.toFixed(2);
+}
+
+function removeFromCart(name) {
+    cart = cart.filter(item => item.name !== name);
+    localStorage.setItem('cart', JSON.stringify(cart)); // Save to localStorage
+    updateCart();
+}
+
+function toggleCart() {
+    document.getElementById("cart").classList.toggle("open");
+}
+
+function checkout() {
+    alert("Checkout complete! (Demo)");
+    cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart)); // Clear localStorage
+    updateCart();
+}
+
+// On page load, show cart from localStorage
+updateCart();
+
+const translations = {
+  en: {
+    "Your Cart": "Your Cart",
+    "Total:": "Total:",
+    "Checkout": "Checkout",
+    "Add to Cart": "Add to Cart",
+    "Checkout complete! (Demo)": "Checkout complete! (Demo)",
+    "Products": "Products",
+    "About": "About",
+    "Contact": "Contact",
+    "Home": "Home",
+    "Car Shampoo": "Car Shampoo",
+    "High quality car shampoo.": "High quality car shampoo.",
+    "Detailer for perfect shine.": "Detailer for perfect shine.",
+    "Tyre and Trim": "Tyre and Trim",
+    "Tyre and trim for new look.": "Tyre and trim for new look.",
+    "Sealant": "Sealant",
+    "Sealant spray for extra protection.": "Sealant spray for extra protection.",
+    "Interior Cleaner": "Interior Cleaner",
+    "Interior cleaner for cleaness and freshnes.": "Interior cleaner for cleaness and freshnes.",
+    "Glass Cleaner": "Glass Cleaner",
+    "Premium glass cleaner.": "Premium glass cleaner."
+  },
+  lt: {
+    "Your Cart": "Krepšelis",
+    "Total:": "Viso:",
+    "Checkout": "Apmokėti",
+    "Add to Cart": "Dėti į krepšelį",
+    "Checkout complete! (Demo)": "Apmokėjimas baigtas! (Demonstracija)",
+    "Products": "Produktai",
+    "About": "Apie",
+    "Contact": "Kontaktai",
+    "Home": "Pradžia",
+    "Car Shampoo": "Automobilio šampūnas",
+    "High quality car shampoo.": "Aukštos kokybės automobilių šampūnas.",
+    "Tyre and Trim": "Padangų ir apdailos priemonė",
+    "Tyre and trim for new look.": "Padangų ir apdailos atnaujinimo priemonė.",
+    "Detailer for perfect shine.": "Greito blizgesio priemonė.",
+    "Sealant": "Vaškalas",
+    "Sealant spray for extra protection.": "Vaškalas purškalas papildomai apsaugai.",
+    "Interior Cleaner": "Salono valiklis",
+    "Interior cleaner for cleaness and freshnes.": "Salono valiklis švarai ir gaivumui.",
+    "Glass Cleaner": "Stiklo valiklis",
+    "Premium glass cleaner.": "Premium stiklo valiklis."
+  }
+};
+
+function applyTranslations(lang) {
+  // Cart
+  document.querySelector('.cart h2').textContent = translations[lang]["Your Cart"];
+  document.querySelector('.cart-total').textContent = translations[lang]["Total:"] + " €" + getCartTotal();
+  document.querySelector('.cart button').textContent = translations[lang]["Checkout"];
+  // Products
+  document.querySelectorAll('.product').forEach(product => {
+    let name = product.querySelector('h3').textContent;
+    let desc = product.querySelector('p').textContent;
+    let btn = product.querySelector('button');
+    // Find the key in both languages
+    for (const key in translations[lang]) {
+      if (translations.en[key] === name || translations.lt[key] === name) {
+        product.querySelector('h3').textContent = translations[lang][key];
+      }
+      if (translations.en[key] === desc || translations.lt[key] === desc) {
+        product.querySelector('p').textContent = translations[lang][key];
+      }
+    }
+    if (btn) btn.textContent = translations[lang]["Add to Cart"];
+  });
+  // Side menu
+  document.querySelectorAll('.side-menu a').forEach(a => {
+    let txt = a.textContent.trim();
+    for (const key in translations[lang]) {
+      if (translations.en[key] === txt || translations.lt[key] === txt) {
+        a.textContent = translations[lang][key];
+      }
+    }
+  });
+}
+
+function getCartTotal() {
+  let total = 0;
+  cart.forEach(item => total += item.price * item.qty);
+  return total.toFixed(2);
+}
+
+function setLanguage(lang) {
+  localStorage.setItem('lang', lang);
+  applyTranslations(lang);
+  updateFlagSelection(lang);
+}
+
+function updateFlagSelection(lang) {
+  document.querySelectorAll('.flag').forEach(flag => {
+    flag.classList.remove('selected');
+  });
+  if (lang === 'en') {
+    document.getElementById('flag-en').classList.add('selected');
+  } else if (lang === 'lt') {
+    document.getElementById('flag-lt').classList.add('selected');
+  }
+}
+
+// Add event listeners for flags
+document.getElementById('flag-en').addEventListener('click', () => setLanguage('en'));
+document.getElementById('flag-lt').addEventListener('click', () => setLanguage('lt'));
+
+// On page load, set language
+const savedLang = localStorage.getItem('lang') || 'en';
+setLanguage(savedLang);
+</script>
+
+</body>
+</html>
+
+
+
+

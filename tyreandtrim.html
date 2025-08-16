@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trim & Tyre | GLEREON Car Care Shop</title>
+  <style>
+    body {
+      background: #111420;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .back-link {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      color: #fe7300;
+      text-decoration: none;
+      font-size: 1em;
+      background: #111420;
+      padding: 0.5em 1em;
+      border-radius: 4px;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .product-detail {
+      max-width: 600px;
+      margin: 120px auto 0 auto;
+      background: #111420;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      padding: 2em;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .product-detail img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1em;
+      background: #22263a;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .product-detail h1 {
+      color: #fe7300;
+      margin-bottom: 0.5em;
+    }
+    .product-detail p {
+      margin-bottom: 1em;
+      font-size: 1.1em;
+    }
+    .product-detail .price {
+      font-size: 1.3em;
+      color: #fe7300;
+      margin-bottom: 1em;
+      display: block;
+    }
+    .add-cart-btn {
+      background: #fe7300;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.7em 2em;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 1em;
+      transition: background 0.2s;
+    }
+    .add-cart-btn:hover {
+      background: #d85f00;
+    }
+  </style>
+</head>
+<body>
+  <a href="Glereon.html" class="back-link">&larr; Back to Shop</a>
+  <div class="product-detail">
+    <img src="spraybottle.jpg" alt="Trim & Tyre">
+    <h1>Trim & Tyre</h1>
+    <p>
+      GLEREON Trim & Tyre restores and protects rubber, plastic, and vinyl surfaces. Leaves a deep, rich finish and helps prevent fading and cracking.
+    </p>
+    <span class="price">€11.72</span>
+    <button class="add-cart-btn" onclick="addToCart()">Add to Cart</button>
+  </div>
+  <script>
+    function addToCart() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ name: "Trim & Tyre", price: 11.72, qty: 1 });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert("Trim & Tyre added to cart!");
+    }
+  </script>
